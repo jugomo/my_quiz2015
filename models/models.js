@@ -24,8 +24,7 @@ var Sequelize = require('sequelize');
 
 // Cargar Modelo ORM
 var sequelize = new Sequelize(DB_name, user, pwd,
-  {
-    dialect:  protocol,
+  { dialect:  protocol,
     protocol: protocol,
     port:     port,
     host:     host,
@@ -35,8 +34,8 @@ var sequelize = new Sequelize(DB_name, user, pwd,
 );
 
 // usar BBDD SQLite:
-var sequelize = new Sequelize(null, null, null,
-                        { dialect: "sqlite", storage: "quiz.sqlite" });
+//var sequelize = new Sequelize(null, null, null,
+  //                      { dialect: "sqlite", storage: "quiz.sqlite" });
 
 // importar la definicion de la tabla de Quiz en quiz.js
 var Quiz = sequelize.import(path.join(__dirname, 'quiz'));
