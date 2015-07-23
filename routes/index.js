@@ -35,4 +35,7 @@ router.get('/quizes/:quizId(\\d+)/edit',   quizController.edit);
 // PUT the quiz to update
 router.put('/quizes/:quizId(\\d+)',        quizController.update);
 
+// DELETE the quiz
+router.delete('/quizes/:quizId(\\d+)',     quizController.destroy);
+
 module.exports = router;
