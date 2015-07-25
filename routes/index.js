@@ -3,6 +3,7 @@ var router = express.Router();
 
 var quizController = require('../controllers/quiz_controller');
 var commentController = require('../controllers/comment_controller');
+var sessionController = require('../controllers/session_controller');
 
 /* GET home page: obtener pagina de entrada */
 router.get('/', function(req, res) {
@@ -17,6 +18,19 @@ router.get('/author',                      quizController.author);
 // show y answer y solo en el caso de que path contenga :quizId en
 // algun lugar (query, body, param) de la cabecera HTTP
 router.param('quizId',                     quizController.load);
+
+// DEFINICION DE RUTAS DE SESION
+
+// GET formulario login
+router.get('/login',  sessionController.new);
+// POST crear la sesion
+router.post('/login', sessionController.create);
+
+// GET destruir la sesion
+router.get('/logout', sessionController.destroy);
+
+
+// DEFINICION DE RUTAS DE QUIZZES
 
 // GET questions page
 router.get('/quizes',                      quizController.index);
@@ -38,6 +52,9 @@ router.put('/quizes/:quizId(\\d+)',        quizController.update);
 
 // DELETE the quiz
 router.delete('/quizes/:quizId(\\d+)',     quizController.destroy);
+
+
+// DEFINICION DE RUTAS DE COMENTARIOS
 
 // GET add comment form
 router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);

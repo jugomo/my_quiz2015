@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var partials = require('express-partials')
 var methodOverride = require('method-override');
+var session = require('express-session');
 
 //importar enrutadores
 var routes = require('./routes/index');
@@ -23,10 +24,29 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(cookieParser());
+app.use(cookieParser('Quiz 2015'));
+//app.use(express.cookieSession({
+//  key: "localhost",
+//  secret: process.env["SESSION_SECRET"],
+//  cookie: { maxAge: 2678400000 },
+//}));
+app.use(session());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(partials());
+
+// helpers dinamicos:
+app.use( function(req, res, next) {
+  // guardar ruta de cada solicitud para redireccionar a vista
+  // anterior despues de login o logout
+
+  //if (!req.path.match(/\/login|\/logout/)) {
+    req.session.redir = '/';//req.path;
+  //}
+  // copiar la sesion para hacerla accesible en las vistas
+  res.locals.session = req.session;
+  next();
+});
 
 // instalar enrutadores
 app.use('/', routes);
