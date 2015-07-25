@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var quizController = require('../controllers/quiz_controller');
 
-/* GET home page. */
+var quizController = require('../controllers/quiz_controller');
+var commentController = require('../controllers/comment_controller');
+
+/* GET home page: obtener pagina de entrada */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Quiz', errors: [] });
 });
@@ -18,6 +20,7 @@ router.param('quizId',                     quizController.load);
 
 // GET questions page
 router.get('/quizes',                      quizController.index);
+// GET a page for a quiz
 router.get('/quizes/:quizId(\\d+)',        quizController.show);
 
 // GET answers page
@@ -25,17 +28,20 @@ router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
 
 // GET creation form
 router.get('/quizes/new',                  quizController.new);
-
 // POST creation of quiz
 router.post('/quizes/create',              quizController.create);
 
 // GET edit quiz form
 router.get('/quizes/:quizId(\\d+)/edit',   quizController.edit);
-
 // PUT the quiz to update
 router.put('/quizes/:quizId(\\d+)',        quizController.update);
 
 // DELETE the quiz
 router.delete('/quizes/:quizId(\\d+)',     quizController.destroy);
+
+// GET add comment form
+router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);
+// POST creation of comment
+router.post('/quizes/:quizId(\\d+)/comments',    commentController.create);
 
 module.exports = router;
