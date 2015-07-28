@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var quizController = require('../controllers/quiz_controller');
+var quizController    = require('../controllers/quiz_controller');
 var commentController = require('../controllers/comment_controller');
 var sessionController = require('../controllers/session_controller');
 
@@ -40,18 +40,21 @@ router.get('/quizes/:quizId(\\d+)',        quizController.show);
 // GET answers page
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
 
+// una ruta puede invocarse con varios middlewares en serie. si el primero no pasa
+// el control con next(), el segundo nunca llega a ejecutarse
+
 // GET creation form
-router.get('/quizes/new',                  quizController.new);
+router.get('/quizes/new',                  sessionController.loginRequired, quizController.new);
 // POST creation of quiz
-router.post('/quizes/create',              quizController.create);
+router.post('/quizes/create',              sessionController.loginRequired, quizController.create);
 
 // GET edit quiz form
-router.get('/quizes/:quizId(\\d+)/edit',   quizController.edit);
+router.get('/quizes/:quizId(\\d+)/edit',   sessionController.loginRequired, quizController.edit);
 // PUT the quiz to update
-router.put('/quizes/:quizId(\\d+)',        quizController.update);
+router.put('/quizes/:quizId(\\d+)',        sessionController.loginRequired, quizController.update);
 
 // DELETE the quiz
-router.delete('/quizes/:quizId(\\d+)',     quizController.destroy);
+router.delete('/quizes/:quizId(\\d+)',     sessionController.loginRequired, quizController.destroy);
 
 
 // DEFINICION DE RUTAS DE COMENTARIOS
