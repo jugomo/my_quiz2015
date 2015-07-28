@@ -13,11 +13,14 @@ router.get('/', function(req, res) {
 // GET author page
 router.get('/author',                      quizController.author);
 
-// Autoload de comandos con :quizId
+// AUTOLOAD DE COMANDOS con :quizId
 // se instala para que se ejecute antes que lo necesiten las rutas
 // show y answer y solo en el caso de que path contenga :quizId en
 // algun lugar (query, body, param) de la cabecera HTTP
 router.param('quizId',                     quizController.load);
+
+router.param('commentId',                  commentController.load);
+
 
 // DEFINICION DE RUTAS DE SESION
 
@@ -63,5 +66,8 @@ router.delete('/quizes/:quizId(\\d+)',     sessionController.loginRequired, quiz
 router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);
 // POST creation of comment
 router.post('/quizes/:quizId(\\d+)/comments',    commentController.create);
+// GET del formulario de moderacion
+router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish',
+                                                 sessionController.loginRequired, commentController.publish);
 
 module.exports = router;
