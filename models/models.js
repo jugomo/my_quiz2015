@@ -66,11 +66,13 @@ sequelize.sync().then(function(){
       // crear la primera pregunta y guardarla en la tabla
       Quiz.create({
         pregunta: 'Capital de Italia',
-        respuesta: 'Roma'
+        respuesta: 'Roma',
+        tema: 'Otro'
       });
       Quiz.create({
         pregunta: 'Capiutal de Portugal',
-        respuesta: 'Lisboa'
+        respuesta: 'Lisboa',
+        tema: "Otro"
       })
       .then(function(){console.log('Base de datos inicializada')});
     };

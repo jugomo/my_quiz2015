@@ -1,9 +1,15 @@
 <table>
+  <tr>
+    <td><b>Pregunta</b></td>
+    <td><b>Temática</b></td>
+    <td colspan=2><b>Opciones</b></td>
+  </tr>
   <% var i; for (i=0; i < quizes.length; i++) { %>
     <tr>
       <td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td>
+      <td><%= quizes[i].tema %></td>
       <% if (session.user) { %>
-        <td><a href="quizes/<%= quizes[i].id %>/edit"<button type="button">editar</button></a></td>
+        <td><a href="quizes/<%= quizes[i].id %>/edit"><button type="button">editar</button></a></td>
         <td>
           <form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
             <button type="submit" onClick="return confirm('Borrar: <%= quizes[i].pregunta %>')">
