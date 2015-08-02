@@ -1,8 +1,25 @@
-<table>
+
+<form method="get" action="/quizes">
+  <label for="preg" class="rem">Buscar en preguntas:</label>
+  <input type="text" id="preg" name="search" value="<%= search %>" />
+  <input type="submit" value="Buscar">
+</form>
+
+<form method="get" action="/quizes">
+  <input type="submit" value="Reset">
+</form>
+
+<br/>
+<hr/>
+<br/>
+
+<table border=1>
   <tr>
     <td><b>Pregunta</b></td>
     <td><b>Temática</b></td>
-    <td colspan=2><b>Opciones</b></td>
+    <% if (session.user) { %>
+      <td colspan=2><b>Opciones</b></td>
+    <% } %>
   </tr>
   <% var i; for (i=0; i < quizes.length; i++) { %>
     <tr>
@@ -21,7 +38,12 @@
     </tr>
   <% } %>
 </table><p>
+
 <p/>
+<br/>
+<hr/>
+<br/>
+
 <% if (session.user) { %>
   <a href="/quizes/new"><button type="button">Crear pregunta</button></a>
 <% } %>

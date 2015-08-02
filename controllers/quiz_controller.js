@@ -20,8 +20,19 @@ exports.load = function(req, res, next, quizId) {
 
 // GET /quizes (con gestion de errores)
 exports.index = function(req, res) {
-  models.Quiz.findAll().then(function(quizes) {
-    res.render('quizes/index.ejs', { quizes: quizes, errors: [] });
+  // obtener cadena a buscar de la url
+  var search = req.query.search;
+  var searchPatern = "%%";
+  if (search != undefined) {
+    searchPatern = "%" + search.split(" ").join("%") + "%"; //.replaceAll(" ","%") + "%"
+  } else {
+    search = "";
+  }
+  console.log("BUSCO: " + search + ", con " + searchPatern);
+
+  models.Quiz.findAll( { where: ["pregunta like ?", searchPatern] } ).then(function(quizes) {
+    // en search voy a enviarle al template la cadena de busqueda previamente insertada
+    res.render('quizes/index.ejs', { quizes: quizes, search: search, errors: [] });
   }).catch(function(error) { next(error); })
 };
 

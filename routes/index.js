@@ -40,6 +40,8 @@ router.get('/quizes',                      quizController.index);
 // GET a page for a quiz
 router.get('/quizes/:quizId(\\d+)',        quizController.show);
 
+router.get('/quizes/:search(\\s+)',  quizController.index)
+
 // GET answers page
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
 
