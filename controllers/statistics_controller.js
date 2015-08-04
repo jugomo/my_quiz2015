@@ -7,7 +7,6 @@ var models = require('../models/models.js');
 var statistics = {
       quizes: 0,
       comments: 0,
-      commentsPerQuiz: 0,
       commentsUnpublished: 0,
       commentedQuizes:0
     };

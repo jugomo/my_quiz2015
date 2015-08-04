@@ -60,12 +60,14 @@ app.use('/', function(req, res, next) {
       delete req.session.user;
       var errors = [{"message" : 'Sesión caducada. Debe volver a loguearse en el sistema para poder continuar.'}];
       req.session.errors = {};
+      console.log("SESION CADUCADA. now: " + (now.getMinutes() - 1) + " stamp: " + stamp.getMinutes());
       res.render('sessions/new', {
         errors: errors
       });
     } else {
       // refrescamos tiempo ultima peticion
       req.session.time = new Date();
+      console.log("SESION REFRESCADA: " + req.session.time);
       req.session.errors = {};
       next();
     }
