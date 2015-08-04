@@ -28,7 +28,7 @@ exports.index = function(req, res) {
   } else {
     search = "";
   }
-  console.log("BUSCO: " + search + ", con " + searchPatern);
+  //console.log("BUSCO: " + search + ", con " + searchPatern);
 
   models.Quiz.findAll( { where: ["pregunta like ?", searchPatern] } ).then(function(quizes) {
     // en search voy a enviarle al template la cadena de busqueda previamente insertada

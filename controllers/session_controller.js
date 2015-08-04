@@ -35,6 +35,9 @@ exports.create = function(req, res) {
 
     // redirigir a path anterior a login
     res.redirect(req.session.redir.toString());
+
+    // refrescamos tiempo ultima peticion
+    req.session.time = new Date();
   });
 };
 
