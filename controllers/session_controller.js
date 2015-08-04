@@ -38,6 +38,7 @@ exports.create = function(req, res) {
 
     // refrescamos tiempo ultima peticion
     req.session.time = new Date();
+    console.log("SESION REFRESCADA TRAS LOGUEO: " + req.session.time);
   });
 };
 
