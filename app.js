@@ -50,7 +50,6 @@ app.use( function(req, res, next) {
 });
 
 // instalar enrutadores
-//app.use('/', routes);
 app.use('/', function(req, res, next) {
   var now = new Date();
   var stamp = req.session.time ? new Date(req.session.time) : new Date();
@@ -74,6 +73,8 @@ app.use('/', function(req, res, next) {
     next();
   }
 }, routes);
+
+app.use('/', routes);
 
 // resto de rutas: generar error 404
 // catch 404 and forward to error handler
