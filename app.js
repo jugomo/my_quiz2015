@@ -52,7 +52,7 @@ app.use( function(req, res, next) {
 // instalar enrutadores
 app.use('/', function(req, res, next) {
   var now = new Date();
-  var stamp = req.session.time ? new Date(req.session.time) : new Date();
+  var stamp = req.session.time ? new Date(req.session.time) : now;
 
   if (!req.path.match(/\/login|\/logout/)) {
     // validamos tiempo ultima peticion > 2 minutos

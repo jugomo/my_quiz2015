@@ -22,6 +22,11 @@ exports.create = function(req, res) {
 
   var userController = require('./user_controller');
   userController.autenticar(login, password, function(error, user) {
+    // refrescamos tiempo ultima peticion
+    req.session.time = null;
+    delete req.session.time //= new Date();
+    console.log("SESION TIME RESETEADO TRAS LOGUEO");
+    
     // si hay error retornamos mensajes de error de sesion
     if (error) {
       req.session.errors = [{ "message": 'Se ha producido un error: ' + error }];
@@ -36,9 +41,6 @@ exports.create = function(req, res) {
     // redirigir a path anterior a login
     res.redirect(req.session.redir.toString());
 
-    // refrescamos tiempo ultima peticion
-    delete req.session.time //= new Date();
-    console.log("SESION TIME RESETEADO TRAS LOGUEO");
   });
 };
 
