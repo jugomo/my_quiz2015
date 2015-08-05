@@ -37,8 +37,8 @@ exports.create = function(req, res) {
     res.redirect(req.session.redir.toString());
 
     // refrescamos tiempo ultima peticion
-    req.session.time = new Date();
-    console.log("SESION REFRESCADA TRAS LOGUEO: " + req.session.time);
+    delete req.session.time //= new Date();
+    console.log("SESION TIME RESETEADO TRAS LOGUEO");
   });
 };
 
