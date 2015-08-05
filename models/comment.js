@@ -16,16 +16,18 @@ module.exports = function(sequelize, DataTypes) {
     {
       classMethods: {
         countUnpublished: function () {
-          return this.aggregate('QuizId', 'count', {'where': { 'publicado': false }})
+          var a = this.aggregate('QuizId', 'count', {'where': { 'publicado': false }})
           .then('success',function(count) {
             return count;
           })
+          return a;
         },
         countCommentedQuizes: function () {
-          return this.aggregate('QuizId', 'count', {'distinct': true })
+          var b = this.aggregate('QuizId', 'count', { 'distinct': true } )
           .then('success',function(count) {
             return count;
           })
+          return (b);
         }
       }
     }

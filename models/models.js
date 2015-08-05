@@ -19,7 +19,7 @@ var port     = (url[5] || null);
 var host     = (url[4] || null);
 var storage  = process.env.DATABASE_STORAGE;
 
-// cargar modelo ORM
+// importar paquete seqelize
 var Sequelize = require('sequelize');
 
 // Cargar Modelo ORM

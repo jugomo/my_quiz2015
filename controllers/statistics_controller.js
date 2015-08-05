@@ -15,6 +15,11 @@ var errors = [];
 
 // MW de procesamiento de datos estadisticos
 exports.calculate = function (req, res, next) {
+  // encadenamos todas las peticiones al ORM, de modo que la siguiente
+  // petición no se formalice hasta que no se haya satisfecho la anterior,
+  // y así garantizamos que a la salida de la función estén todos los
+  // datos disponibles en el modelo
+
   models.Quiz.count()
   // preguntas
   .then(function (numQuizes) {
@@ -37,6 +42,7 @@ exports.calculate = function (req, res, next) {
   })
   // capturar errores
   .catch(function (err) { errors.push(err); })
+  // pasar el control al siguiente MW (renderizar statistics)
   .finally(function () {
     next();
   });
